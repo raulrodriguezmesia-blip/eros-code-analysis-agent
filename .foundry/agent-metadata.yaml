@@ -1,0 +1,8 @@
+agent:
+  name: code-analysis-agent
+  version: "1.0.0"
+  environment: dev
+  project_endpoint: ""
+  
+evaluationSuites: []
+lastEval: null

@@ -1,0 +1,3 @@
+{"input": "def login(user, pass): return db.query(f'SELECT * FROM users WHERE user=\"{user}\" AND pass=\"{pass}\"')", "expected_language": "python"}
+{"input": "function process(data) { return data.filter(x => x.active).map(x => x.name); }", "expected_language": "javascript"}
+{"input": "public class Calculator { public int add(int a, int b) { return a + b; } }", "expected_language": "csharp"}

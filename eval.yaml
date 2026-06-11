@@ -1,0 +1,15 @@
+agent:
+  name: code-analysis-agent
+  deployment: gpt-4
+
+dataset_file: .foundry/datasets/eval-dataset.jsonl
+
+evaluators:
+  - relevance
+  - correctness
+  - coherence
+
+options:
+  eval_model: gpt-4
+  pass_threshold: 0.7
+  max_samples: 10

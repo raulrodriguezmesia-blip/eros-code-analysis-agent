@@ -1,0 +1,10 @@
+name: eros-code-analysis
+description: Multi-step code analysis and refactoring agent that reviews code quality, bugs, security, and performance
+template:
+  kind: hosted
+  protocols:
+    - type: responses
+      version: v1
+  environment_variables:
+    - MODEL_DEPLOYMENT
+    - PROJECT_ENDPOINT

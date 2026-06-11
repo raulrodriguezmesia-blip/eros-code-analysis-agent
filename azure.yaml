@@ -1,0 +1,6 @@
+name: code-analysis-agent
+services:
+  reasoning-agent:
+    project: ./
+    language: python
+    host: azure.ai.agent.hosted
