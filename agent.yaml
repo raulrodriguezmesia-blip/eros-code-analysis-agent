@@ -1,5 +1,5 @@
 name: eros-code-analysis
-description: Multi-step code analysis agent with Microsoft Foundry IQ integration for reasoning, security, and performance
+description: Multi-agent reasoning system with Microsoft Foundry IQ - Code analysis + IT Support
 template:
   kind: hosted
   protocols:
@@ -10,3 +10,14 @@ template:
     - PROJECT_ENDPOINT
     - FOUNDRY_TOOLBOX_ENDPOINT
     - FOUNDRY_IQ_ENDPOINT
+
+variants:
+  - name: code-analysis
+    description: 5-phase code review pipeline
+    entrypoint: app.main:analyze_code_multi_step
+  - name: it-support
+    description: 4-phase IT incident resolution
+    entrypoint: app.hybrid_agent:it_support_reasoning
+  - name: hybrid
+    description: Auto-routing multi-agent
+    entrypoint: app.hybrid_agent:hybrid_agent

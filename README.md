@@ -26,6 +26,13 @@ Multi-step reasoning AI agent for code analysis with Microsoft IQ integration.
 4. **Performance Analysis**: Bottlenecks, complexity, optimization opportunities
 5. **Refactoring**: Improved code with explanations
 
+## Variants
+
+**Three reasoning modes available:**
+- `code-analysis`: 5-phase code review pipeline
+- `it-support`: 4-phase IT incident resolution (AWS/Spring Boot)
+- `hybrid`: Auto-routing based on input type
+
 ## Demo Example
 
 **Input:**
