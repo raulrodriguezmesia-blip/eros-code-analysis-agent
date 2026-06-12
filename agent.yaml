@@ -1,5 +1,5 @@
 name: eros-code-analysis
-description: Multi-step code analysis and refactoring agent that reviews code quality, bugs, security, and performance
+description: Multi-step code analysis agent with Microsoft Foundry IQ integration for reasoning, security, and performance
 template:
   kind: hosted
   protocols:
@@ -8,3 +8,5 @@ template:
   environment_variables:
     - MODEL_DEPLOYMENT
     - PROJECT_ENDPOINT
+    - FOUNDRY_TOOLBOX_ENDPOINT
+    - FOUNDRY_IQ_ENDPOINT

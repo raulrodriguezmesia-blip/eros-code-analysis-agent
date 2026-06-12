@@ -5,7 +5,24 @@ from typing import Any, Optional
 from azure.ai.agentserver.responses import ResponsesHostServer
 from openai import OpenAI
 
+# Microsoft IQ Integration - Foundry IQ for advanced reasoning
+FOUNDRY_IQ_ENDPOINT = os.environ.get("FOUNDRY_IQ_ENDPOINT", "")
 TOOLBOX_ENDPOINT = os.environ.get("FOUNDRY_TOOLBOX_ENDPOINT", "")
+
+def query_foundry_iq(prompt: str, context: str = "") -> Optional[str]:
+    """Query Microsoft Foundry IQ for enhanced reasoning."""
+    if not FOUNDRY_IQ_ENDPOINT:
+        return None
+    try:
+        resp = requests.post(
+            f"{FOUNDRY_IQ_ENDPOINT}/reason",
+            headers={"Content-Type": "application/json"},
+            json={"query": prompt, "context": context, "type": "analysis"},
+            timeout=30
+        )
+        return resp.json().get("result") if resp.ok else None
+    except:
+        return None
 
 def search_best_practices(query: str) -> Optional[str]:
     """Search for best practices using toolbox."""
@@ -45,7 +62,12 @@ def analyze_code_multi_step(user_message: dict[str, Any]) -> dict[str, Any]:
         "analysis_pipeline": []
     }
     
-    # Phase 1: Syntax & Basic Structure
+    # Phase 1: Syntax & Basic Structure (Enhanced with Foundry IQ)
+    iq_syntax = query_foundry_iq(f"Syntax analysis for {language_hint} code", code)
+    phase1_prompt = f"Analyze this {language_hint} code for syntax errors:\n\n{code}"
+    if iq_syntax:
+        phase1_prompt += f"\n\nFoundry IQ insight:\n{iq_syntax}"
+    
     phase1 = client.chat.completions.create(
         model=os.environ.get("MODEL_DEPLOYMENT", "gpt-4"),
         messages=[{
@@ -53,7 +75,7 @@ def analyze_code_multi_step(user_message: dict[str, Any]) -> dict[str, Any]:
             "content": "You are a code linter. Identify syntax errors, undefined variables, and structural issues. Be concise."
         }, {
             "role": "user", 
-            "content": f"Analyze this {language_hint} code for syntax errors:\n\n{code}"
+            "content": phase1_prompt
         }],
         max_tokens=500,
         temperature=0.1
@@ -61,7 +83,8 @@ def analyze_code_multi_step(user_message: dict[str, Any]) -> dict[str, Any]:
     analysis_report["analysis_pipeline"].append({
         "phase": "syntax_check",
         "step": 1,
-        "findings": phase1.choices[0].message.content
+        "findings": phase1.choices[0].message.content,
+        "iq_enhanced": bool(iq_syntax)
     })
     
     # Phase 2: Code Quality & Best Practices
