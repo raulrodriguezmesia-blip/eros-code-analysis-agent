@@ -26,6 +26,17 @@ Multi-step reasoning AI agent for code analysis with Microsoft IQ integration.
 4. **Performance Analysis**: Bottlenecks, complexity, optimization opportunities
 5. **Refactoring**: Improved code with explanations
 
+## Demo Example
+
+**Input:**
+```python
+def get_user(id):
+    query = "SELECT * FROM users WHERE id=" + id
+    return db.execute(query)
+```
+
+**Output:** Full 5-phase analysis including SQL injection vulnerability detection, refactored secure code with parameterized queries.
+
 ## Quick Start
 
 ```bash

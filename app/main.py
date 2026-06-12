@@ -38,18 +38,41 @@ def search_best_practices(query: str) -> Optional[str]:
     except:
         return None
 
+def detect_language(code: str) -> str:
+    """Auto-detect programming language from code patterns."""
+    patterns = {
+        "python": ["def ", "import ", "self.", "lambda ", "async def"],
+        "javascript": ["function ", "const ", "let ", "=>", "console.log"],
+        "typescript": ["interface ", ": ", "as ", "<T>", "enum "],
+        "csharp": ["using ", "public class", "namespace ", "var ", "async Task"],
+        "java": ["public static", "private ", "@Override", "new ", "System.out"],
+        "go": ["func ", "package ", "import (", "go ", "range "],
+        "rust": ["fn ", "let mut", "impl ", "trait ", "unsafe"],
+    }
+    scores = {lang: sum(1 for p in pats if p in code) for lang, pats in patterns.items()}
+    detected = max(scores, key=scores.get) if max(scores.values()) > 0 else "auto-detect"
+    return detected
+
+def format_markdown_report(report: dict) -> str:
+    """Format analysis report as Markdown for rich presentation."""
+    md = f"# Code Analysis Report\n\n**Language**: {report.get('language_detected', 'unknown')}\n\n"
+    for phase in report.get("analysis_pipeline", []):
+        md += f"## Phase {phase['step']}: {phase['phase'].replace('_', ' ').title()}\n\n"
+        md += f"{phase['findings']}\n\n"
+        if phase.get("iq_enhanced"):
+            md += "*Enhanced with Microsoft Foundry IQ*\n\n"
+    md += "## Summary\n\n"
+    md += f"{json.dumps(report.get('summary', {}), indent=2)}\n"
+    return md
+
 def analyze_code_multi_step(user_message: dict[str, Any]) -> dict[str, Any]:
-    """Multi-step code analysis with structured reasoning.
-    
-    Executes 5-phase analysis pipeline optimized for the Agents League hackathon:
-    - Phase 1: Syntax validation
-    - Phase 2: Code quality  
-    - Phase 3: Security audit
-    - Phase 4: Performance optimization
-    - Phase 5: Refactoring with best practices
-    """
+    """Multi-step code analysis with structured reasoning."""
     code = user_message.get("input", "")
+    
+    # Auto-detect language if not specified
     language_hint = user_message.get("language", "auto-detect")
+    if language_hint == "auto-detect":
+        language_hint = detect_language(code)
     
     client = OpenAI(
         base_url=os.environ.get("PROJECT_ENDPOINT"),
@@ -176,8 +199,12 @@ def analyze_code_multi_step(user_message: dict[str, Any]) -> dict[str, Any]:
         "next_steps": "Review refactor_suggestions for improved implementation"
     }
     
+    # Add formatted markdown report
+    analysis_report["formatted_output"] = format_markdown_report(analysis_report)
+    
     return {
         "output": json.dumps(analysis_report, indent=2),
+        "formatted": analysis_report["formatted_output"],
         "status": "completed"
     }
 
