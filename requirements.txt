@@ -1,5 +1,6 @@
-azure-ai-agentserver-responses>=1.0.0
+azure-ai-agentserver-responses>=1.0.0b1
 azure-identity>=1.0.0
 python-dotenv>=1.0.0
 openai>=1.0.0
 requests>=2.31.0
+aiofiles>=23.0.0
