@@ -33,6 +33,30 @@ Multi-step reasoning AI agent for code analysis with Microsoft IQ integration.
 - `it-support`: 4-phase IT incident resolution (AWS/Spring Boot)
 - `hybrid`: Auto-routing based on input type
 
+## 🚀 Quick Start & One-Click Deploy
+
+Eros Code Analysis Agent is fully optimized for fast execution and deployment using the Azure Developer CLI (`azd`).
+
+### Local Simulation (3-Step Quick Run)
+Clone, install dependencies, and run the pipeline verification immediately:
+```bash
+# 1. Clone the repository
+git clone https://github.com/raulrodriguezmesia-blip/eros-code-analysis-agent && cd eros-code-analysis-agent
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run the multi-step reasoning validation script
+python test_agent.py
+```
+
+### ☁️ Cloud Deployment via Microsoft Foundry
+Initialize and provision your agent infrastructure into your Azure environment instantly:
+```bash
+azd init --with-python
+azd up
+```
+
 ## Demo Example
 
 **Input:**
