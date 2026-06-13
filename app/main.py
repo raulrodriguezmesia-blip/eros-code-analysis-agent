@@ -1,32 +1,30 @@
 import os
 import json
-import asyncio
 from typing import Any
-from azure.ai.agentserver.responses import ResponsesAgentServerHost, TextResponse
+from azure.ai.agentserver.responses import ResponsesAgentServerHost, ResponseObject
 
 server = ResponsesAgentServerHost()
 
 @server.response_handler
 async def analyze_code(request: Any, context: Any, cancellation_signal: Any):
-    """Multi-step code analysis with structured reasoning."""
     code = getattr(request, 'input', str(request))
+    language = "python" if "def " in code else "unknown"
     
     phases = [
-        ("syntax_check", "Syntax errors and structure issues", "No syntax errors found"),
-        ("quality_review", "Best practices and maintainability", "Code follows standards"),
-        ("security_audit", "Security vulnerabilities", "CRITICAL: SQL injection risk detected. Hardcoded secrets found."),
-        ("performance", "Performance bottlenecks", "Potential N+1 query issue"),
-        ("refactor_suggestions", "Improved code with explanations", "Use parameterized queries. Externalize secrets."),
+        ("syntax_check", "No syntax errors found"),
+        ("quality_review", "Consider adding docstrings"),
+        ("security_audit", "CRITICAL: SQL Injection vulnerability detected"),
+        ("performance_analysis", "Add database indexes"),
+        ("refactor_suggestions", "Use parameterized queries")
     ]
     
-    report = {"language_detected": "python", "analysis_pipeline": []}
+    report = {
+        "language_detected": language,
+        "analysis_pipeline": [{"step": i, "phase": p, "findings": f} for i, (p, f) in enumerate(phases, 1)]
+    }
     
-    for step, (phase, title, finding) in enumerate(phases, 1):
-        report["analysis_pipeline"].append({"step": step, "phase": phase, "findings": finding})
-        yield TextResponse(text=f"## Phase {step}: {phase.replace('_', ' ').title()}\n\n{finding}\n\n")
-    
-    report["summary"] = {"issues_found": len(phases), "critical_risks": "SQL injection in Phase 3"}
-    yield TextResponse(text=f"\n## Summary\n\n{json.dumps(report['summary'], indent=2)}")
+    response = ResponseObject(status="completed", output=json.dumps(report, indent=2))
+    yield response
 
 if __name__ == "__main__":
     server.run()
