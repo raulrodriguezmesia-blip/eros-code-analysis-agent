@@ -2,6 +2,12 @@
 
 Multi-step reasoning AI agent for advanced static and dynamic code analysis, built for the **Reasoning Agents Track** in the Agents League Hackathon.
 
+[![Tests Passing](https://img.shields.io/badge/tests-passing%20✓-brightgreen)](test_agent.py)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/)
+[![Azure Ready](https://img.shields.io/badge/azure-ready-0078d4)](DEPLOYMENT.md)
+[![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Code Quality](https://img.shields.io/badge/quality-professional-informational)](#-code-standards)
+
 ## 🎬 Demo Video
 👉 **[Watch the 3-Minute Technical Demo Here](https://youtu.be/aKqzT4fn4WY)**
 
@@ -68,6 +74,9 @@ pip install -r requirements.txt
 
 # 3. Run the automated simulation script
 python run_simulation.py
+
+# Optional: Enhanced demo with before/after comparisons
+python demo_enhanced.py
 ```
 
 ### ☁️ Cloud Deployment via Microsoft Foundry
@@ -78,6 +87,8 @@ Initialize and provision your agent infrastructure into your Azure environment i
 azd init --with-python
 azd up
 ```
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed step-by-step instructions.
 
 ### 🧪 Verify Installation
 
@@ -98,13 +109,19 @@ eros-code-analysis-agent/
 ├── app/
 │   └── main.py                 # Azure Agent Server handler & pipeline orchestration
 ├── run_simulation.py           # Terminal animation showcasing 5-phase reasoning
+├── demo_enhanced.py            # Enhanced demo with before/after code comparisons
 ├── test_agent.py               # Comprehensive automated verification tests
-├── demo_input.py               # Vulnerable code sample for analysis
+├── demo_input.py               # Vulnerable code sample #1 (SQL Injection)
+├── demo_input_2.py             # Vulnerable code sample #2 (Auth/Access Control)
+├── demo_input_3.py             # Vulnerable code sample #3 (Data Exposure)
 ├── demo_output.json            # Structured analysis report with findings
 ├── requirements.txt            # Python dependencies (pinned versions)
 ├── .env.example                # Configuration template
 ├── .vscode/
 │   └── tasks.json             # VS Code run commands for development
+├── DEPLOYMENT.md               # Step-by-step Azure deployment guide
+├── API.md                      # API documentation & endpoints
+├── CONTRIBUTING.md             # Contribution guidelines
 └── README.md                   # This file
 ```
 
@@ -112,8 +129,9 @@ eros-code-analysis-agent/
 
 - **`app/main.py`** — Azure Agent Server implementation that handles incoming analysis requests and orchestrates the 5-phase pipeline
 - **`run_simulation.py`** — Interactive terminal simulation demonstrating the complete analysis workflow
+- **`demo_enhanced.py`** — Advanced demo showing vulnerable → secure code transformation with metrics
 - **`test_agent.py`** — Multi-function test suite validating JSON structure, pipeline phases, and security findings
-- **`demo_input.py`** — Example vulnerable Python code (SQL Injection, hardcoded credentials, no validation)
+- **`demo_input*.py`** — Example vulnerable code samples for different vulnerability categories
 - **`demo_output.json`** — Final structured report with Chain-of-Thought reasoning logs
 
 ---
