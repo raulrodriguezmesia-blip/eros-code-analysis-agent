@@ -1,0 +1,58 @@
+name: Reusable Python CI
+
+on:
+  workflow_call:
+    inputs:
+      python-versions:
+        required: true
+      working-directory:
+        required: true
+      requirements-file:
+        required: true
+      test-command:
+        required: true
+      lint-command:
+        required: true
+      coverage-file:
+        required: true
+      codecov-token:
+        required: false
+        default: ${{ secrets.CODECOV_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ${{ fromJSON(inputs['python-versions']) }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          cd ${{ inputs['working-directory'] }}
+          python -m pip install --upgrade pip
+          pip install -r ${{ inputs['requirements-file'] }}
+
+      - name: Run tests with coverage
+        run: |
+          cd ${{ inputs['working-directory'] }}
+          ${{ inputs['test-command'] }}
+
+      - name: Run linter
+        run: |
+          cd ${{ inputs['working-directory'] }}
+          ${{ inputs['lint-command'] }} || echo "Linting completed with warnings"
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ${{ inputs['coverage-file'] }}
+          token: ${{ inputs['codecov-token'] }}
+          fail_ci_if_error: false
