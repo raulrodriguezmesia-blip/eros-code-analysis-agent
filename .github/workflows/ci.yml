@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  call-python-ci:
+    uses: ./.github/workflows/reusable-python-ci.yml
+    with:
+      python-versions: '["3.11", "3.12"]'
+      working-directory: "."
+      requirements-file: "requirements.txt"
+      test-command: "pytest -v --cov --cov-report=xml"
+      lint-command: "ruff check ."
+      coverage-file: "coverage.xml"
+      codecov-token: ${{ secrets.CODECOV_TOKEN }}
