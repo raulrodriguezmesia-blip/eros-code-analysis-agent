@@ -24,7 +24,7 @@ Java/Spring Boot microservices, and AWS Cloud environments. You must execute and
 
 client = OpenAI(
     base_url=os.environ.get("PROJECT_ENDPOINT"),
-    api_key=os.environ.get("MODEL_DEPLOYMENT")
+    api_key=os.environ.get("PROJECT_KEY", "")
 )
 
 def it_support_reasoning(logs: str) -> dict[str, Any]:
