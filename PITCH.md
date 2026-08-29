@@ -1,136 +1,136 @@
-# 🎤 Eros Agent — 2-Minute Pitch
+# 🎤 Eros Agent — Desafío de Ingeniería de Frontera 2026
 
-**Use this script for your presentation (read in 2 minutes)**
-
----
-
-## 📢 OPENING (20 seconds)
-
-"We're Eros — an AI reasoning agent that finds security vulnerabilities in code and fixes them automatically.
-
-Instead of simple pattern matching, Eros uses **5-phase structured reasoning** powered by Microsoft Foundry IQ to deeply analyze code like a security expert would."
+**Pitch para presentación (2 minutos)**
 
 ---
 
-## 🎯 THE PROBLEM (20 seconds)
+## 📢 APERTURA (20 segundos)
 
-"Today, code analysis tools are either:
-- **Fast but shallow** — miss complex vulnerabilities
-- **Accurate but slow** — take minutes per file
-- **Hard to use** — require manual configuration
+"Somos Eros — un agente de razonamiento IA que encuentra vulnerabilidades de seguridad en código y las repara automáticamente.
 
-Developers need something that's **fast, accurate, AND actionable.**"
+A diferencia del análisis por patrones, Eros usa **razonamiento estructurado en 5 fases** potenciado por Microsoft Foundry IQ para analizar código como un experto de seguridad."
 
 ---
 
-## ✨ THE SOLUTION (30 seconds)
+## 🎯 EL PROBLEMA (20 segundos)
 
-"Eros solves this with a 5-phase pipeline:
+"Hoy, las herramientas de análisis de código son:
+- **Rápidas pero superficiales** — no detectan vulnerabilidades complejas
+- **Precisas pero lentas** — tardan minutos por archivo
+- **Difíciles de usar** — requieren configuración manual
 
-1. **Syntax Check** — Validates code structure (45ms)
-2. **Quality Review** — Checks standards compliance (120ms)
-3. **Security Audit** — Scans for OWASP Top 10 vulnerabilities (350ms)
-   - Detects SQL Injection, Auth Bypass, Data Exposure
-4. **Performance Analysis** — Finds bottlenecks (80ms)
-5. **Refactoring** — Generates secure code proposals (405ms)
-
-**Total: 1 second. Confidence: 98%.**"
+Los desarrolladores necesitan algo **rápido, preciso Y accionable.**"
 
 ---
 
-## 📊 DEMO (30 seconds)
+## ✨ LA SOLUCIÓN (30 segundos)
 
-"Let me show you:
+"Eres resuelve esto con un pipeline de 5 fases:
 
-**Vulnerable Code:**
+1. **Syntax Check** — Valida estructura del código (45ms)
+2. **Quality Review** — Verifica cumplimiento de estándares (120ms)
+3. **Security Audit** — Escanea vulnerabilidades OWASP Top 10 (350ms)
+   - Detecta SQL Injection, Auth Bypass, Data Exposure
+4. **Performance Analysis** — Encuentra cuellos de botella (80ms)
+5. **Refactoring** — Genera propuestas de código seguro (405ms)
+
+**Total: 1 segundo. Confianza: 98%.**"
+
+---
+
+## 📊 DEMO (30 segundos)
+
+"Veamos:
+
+**Código Vulnerable:**
 ```python
 def get_user(user_id):
     query = f"SELECT * FROM users WHERE id={user_id}"
     return db.execute(query)  # 🚨 SQL Injection!
 ```
 
-**Eros Analysis:**
-- Phase 3 detects: CWE-89 SQL Injection ❌ CRITICAL
+**Análisis de Eros:**
+- Fase 3 detecta: CWE-89 SQL Injection ❌ CRÍTICO
 
-**Secure Code (auto-generated):**
+**Código Seguro (auto-generado):**
 ```python
 def get_user(user_id: int):
     query = "SELECT * FROM users WHERE id = %s"
-    return db.execute(query, (user_id,))  # ✅ Safe!
+    return db.execute(query, (user_id,))  # ✅ Seguro!
 ```
 
-This is **one of 9 vulnerabilities** it found and fixed in this code."
+Esto es **una de 9 vulnerabilidades** que encontró y reparó en este código."
 
 ---
 
-## 🚀 WHY IT MATTERS (20 seconds)
+## 🚀 POR QUÉ IMPORTA (20 segundos)
 
-"With Eros:
-- ✅ Security teams analyze code **10x faster**
-- ✅ Developers **fix vulnerabilities automatically**
-- ✅ No false positives — **98% accurate**
-- ✅ Ready for **enterprise scale** on Azure
+"Con Eros:
+- ✅ Equipos de seguridad analizan código **10x más rápido**
+- ✅ Desararrolladores **reparan vulnerabilidades automáticamente**
+- ✅ Sin falsos positivos — **98% de precisión**
+- ✅ Listo para **escala empresarial** en Azure
 
-We've validated everything with automated tests — all passing."
-
----
-
-## 🏆 CLOSING (20 seconds)
-
-"Eros represents the future of code analysis: **AI-powered, reasoning-based, production-ready.**
-
-We built it in **Python with Azure integration**, fully documented, and ready to deploy.
-
-We're excited to bring this to production and help enterprises secure their code at scale.
-
-**Thank you!**"
+Todo validado con tests automatizados — todos pasando."
 
 ---
 
-## 🎬 HOW TO DEMO
+## 🏆 CIERRE (20 segundos)
 
-If judges want to see it live:
+"Eros representa el futuro del análisis de código: **potenciado por IA, basado en razonamiento, listo para producción.**
+
+Lo construimos en **Python con integración Azure**, completamente documentado, y listo para desplegar.
+
+Estamos emocionados de llevar esto a producción y ayudar a empresas a asegurar su código a escala.
+
+**¡Gracias!**"
+
+---
+
+## 🎬 CÓMO HACER EL DEMO
+
+Si los jueces quieren verlo en vivo:
 
 ```bash
-# Show QUICK execution
+# Mostrar ejecución RÁPIDA
 python run_simulation.py
 
-# Or enhanced version with code comparisons
+# O versión mejorada con comparaciones de código
 python demo_enhanced.py
 
-# Or run tests
-python test_agent.py
+# O ejecutar tests
+pytest test_agent.py -v
 ```
 
-**Time:** 30-60 seconds of real output. Very impressive.
+**Tiempo:** 30-60 segundos de salida real. Muy impresionante.
 
 ---
 
-## 📝 KEY NUMBERS TO REMEMBER
+## 📝 NÚMEROS CLAVE PARA RECORDAR
 
-- **1 second** — Total analysis time
-- **5 phases** — Structured reasoning pipeline
-- **9 vulnerabilities** — Detected in demo code
-- **98%** — Confidence score
-- **500+** — CWE patterns in database
-- **0** — False positives (validated)
-
----
-
-## 💡 IF ASKED QUESTIONS
-
-**"How is this different from SonarQube?"**
-→ We use AI reasoning + Foundry IQ for deeper analysis. SonarQube uses rules. Ours understands context.
-
-**"Can it handle other languages?"**
-→ Currently Python-focused. Architecture supports JavaScript, Java. Extensible design.
-
-**"What about false positives?"**
-→ Our test suite validates every finding. 98% accuracy. Real security vulnerabilities only.
-
-**"How does it scale?"**
-→ Azure Agent Server + Foundry integration = enterprise-ready. One-click deployment.
+- **1 segundo** — Tiempo total de análisis
+- **5 fases** — Pipeline de razonamiento estructurado
+- **9 vulnerabilidades** — Detectadas en código demo
+- **98%** — Score de confianza
+- **500+** — Patrones CWE en base de datos
+- **0** — Falsos positivos (validado)
 
 ---
 
-**You're ready! Go present Eros and win! 🏆**
+## 💡 SI PREGUNTAN
+
+**"¿En qué se diferencia de SonarQube?"**
+→ Usamos razonamiento IA + Foundry IQ para análisis profundo. SonarQube usa reglas. El nuestro entiende contexto.
+
+**"¿Puede manejar otros lenguajes?"**
+→ Actualmente enfocado en Python. Arquitectura soporta JavaScript, Java. Diseño extensible.
+
+**"¿Qué hay de los falsos positivos?"**
+→ Nuestra suite de tests valida cada hallazgo. 98% de precisión. Solo vulnerabilidades reales.
+
+**"¿Cómo escala?"**
+→ Azure Agent Server + Foundry integration = listo para empresa. Despliegue en un clic.
+
+---
+
+**¡Estás listo! Ve a presentar a Eros y gana! 🏆**

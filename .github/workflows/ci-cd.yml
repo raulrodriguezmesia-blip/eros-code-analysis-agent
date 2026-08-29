@@ -1,4 +1,4 @@
-name: EROS CI/CD Pipeline
+name: EROS CI/CD Pipeline — Desafío de Ingeniería de Frontera 2026
 
 on:
   push:
@@ -89,8 +89,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Deploy to Azure
+      - name: Deploy to Azure — Desafío de Ingeniería de Frontera 2026
         run: |
-          echo "Deploying EROS Code Analysis Agent..."
+          echo "Deploying EROS Code Analysis Agent — Desafío de Ingeniería de Frontera 2026..."
           # Deployment steps would go here
           echo "Deployment completed successfully"

@@ -1,0 +1,35 @@
+title: Eros Code Analysis Agent
+description: Agente de IA para análisis de código - Desafío de Ingeniería de Frontera 2026
+baseurl: "/eros-code-analysis-agent"
+url: "https://raulrodriguezmesia-blip.github.io"
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Social links
+author: Raul Rodriguez Mesia
+github_username: raulrodriguezmesia-blip
+linkedin_username: raulrodriguezmesia
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Exclude from processing
+exclude:
+  - .azure/
+  - .foundry/
+  - .kilo/
+  - app/__pycache__/
+  - __pycache__/
+  - .pytest_cache/
+  - .coverage
+  - "*.py"
+  - requirements.txt
+  - Dockerfile
+  - pytest.ini
+  - "*.sql"
+  - "*.json"
+  - "*.yaml"
+  - "*.yml"

@@ -1,4 +1,4 @@
-name: CI
+name: EROS CI — Desafío de Ingeniería de Frontera 2026
 
 on:
   push:
